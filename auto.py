@@ -3,7 +3,6 @@ import collections
 from pprint import pprint
 from traceback import print_tb
 #####################
-print ("Holako M9ewd M9ewd M9ewd M9ewd M9ewd")
 # extation
 ex_compress =['iso','zip', 'tar', 'torrent', 'rar', '7z']
 ex_document = ['txt', 'pdf', 'csv', 'xls', 'doc', 'docx', 'html','ppt', 'pptx']
@@ -21,7 +20,7 @@ dest_dir_image = "C:\\Users\\Administrator\\Downloads\\Images"
 dest_dir_doc = "C:\\Users\\Administrator\\Downloads\\Documents"
 dest_dir_comp = "C:\\Users\\Administrator\\Downloads\\Compressed"
 
-# mapping filesL
+# mapping files
 files_mapping = collections.defaultdict(list)
 files_list = os.listdir(source_dir)
 
