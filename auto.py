@@ -1,28 +1,27 @@
 import os
 import collections
-from pprint import pprint
-from traceback import print_tb
 #####################
 # extation
 ex_compress =['iso','zip', 'tar', 'torrent', 'rar', '7z']
 ex_document = ['txt', 'pdf', 'csv', 'xls', 'doc', 'docx', 'html','ppt', 'pptx']
 ex_music = ['mp3','wav']
-ex_program =['exe','msi']
+ex_program =['exe','msi','apk']
 ex_video =['mp4','avi','mkv','mov','mpg','h264']
 ex_image =['png','jpg','jpeg','gif','ico','bmp','webp','PNG']
 
 #main path
-source_dir ="C:\\Users\\Administrator\\Downloads"
-dest_dir_prog ="C:\\Users\\Administrator\\Downloads\\Programs"
-dest_dir_music ="C:\\Users\\Administrator\\Downloads\\Music"
-dest_dir_video ="C:\\Users\\Administrator\\Downloads\\Video"
-dest_dir_image = "C:\\Users\\Administrator\\Downloads\\Images"
-dest_dir_doc = "C:\\Users\\Administrator\\Downloads\\Documents"
-dest_dir_comp = "C:\\Users\\Administrator\\Downloads\\Compressed"
+base_path = os.path.expanduser('~')
+downloads_path = os.path.join(base_path, 'Downloads')
+dest_dirs = [ 'Programs','Documents','Music','Video','Images','Compressed','Others']
 
+for d in dest_dirs:
+    dir_path = os.path.join(downloads_path, d)
+    if not os.path.isdir(dir_path):
+        os.mkdir(dir_path)
+        
 # mapping files
 files_mapping = collections.defaultdict(list)
-files_list = os.listdir(source_dir)
+files_list = os.listdir(downloads_path)
 
 for file_name in files_list:
     file_ext  = file_name.split('.')[-1]
@@ -30,36 +29,32 @@ for file_name in files_list:
 
 #move files 
 for f_ext, f_list in files_mapping.items():
-
     if f_ext in ex_program:
         for file in f_list:
-            os.rename(os.path.join(source_dir, file), os.path.join(dest_dir_prog, file))
+            os.rename(os.path.join(downloads_path, file), os.path.join(downloads_path, 'Programs',file))
         print (" all programs done")
 
     elif f_ext in ex_music:
         for file in f_list:
-            os.rename(os.path.join(source_dir, file), os.path.join(dest_dir_music, file))
+            os.rename(os.path.join(downloads_path, file), os.path.join(downloads_path,'Music', file))
         print (" all music done")
 
     elif f_ext in ex_video:
         for file in f_list:
-            os.rename(os.path.join(source_dir, file), os.path.join(dest_dir_video, file))
+            os.rename(os.path.join(downloads_path, file), os.path.join(downloads_path,'Video', file))
         print (" all vedios done")
 
     elif f_ext in ex_image:
         for file in f_list:
-            os.rename(os.path.join(source_dir, file), os.path.join(dest_dir_image, file))
+            os.rename(os.path.join(downloads_path, file), os.path.join(downloads_path,'Images', file))
         print (" all images done")
 
     elif f_ext in ex_document:
         for file in f_list:
-            os.rename(os.path.join(source_dir, file), os.path.join(dest_dir_doc, file))
+            os.rename(os.path.join(downloads_path, file), os.path.join(downloads_path,'Documents',file))
         print (" all documents done")
-
 
     elif f_ext in ex_compress:
         for file in f_list:
-            os.rename(os.path.join(source_dir, file), os.path.join(dest_dir_comp, file))
+            os.rename(os.path.join(downloads_path, file), os.path.join(downloads_path,'Compressed', file))
         print (" all compressed files done")
-
- 
